@@ -3,6 +3,11 @@ package com.example.reactflow.component
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.io.Serializable
 
+/**
+ * Complete state object exchanged between the Kotlin component and the React
+ * adapter. Vaadin observes this state key and transports updates in both
+ * directions, allowing browser interactions to update the server-side model.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 class ReactFlowState(
     var nodes: List<ReactFlowNode> = emptyList(),

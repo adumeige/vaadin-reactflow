@@ -3,6 +3,14 @@ package com.example.reactflow.component
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.io.Serializable
 
+/**
+ * Server-side representation of a React Flow node.
+ *
+ * The property names intentionally mirror @xyflow/react's Node shape so Vaadin
+ * can serialize instances directly to the TypeScript adapter. Unknown fields
+ * coming back from the browser are ignored to keep the component compatible with
+ * React Flow adding client-only metadata.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 class ReactFlowNode(
     var id: String? = null,
@@ -25,48 +33,59 @@ class ReactFlowNode(
     var isSelected: Boolean = false,
 ) : Serializable {
 
+    /** Creates a node at the given canvas coordinates. */
     constructor(id: String, x: Double, y: Double) : this(
         id = id,
         position = NodePosition(x, y),
     )
 
+    /** Creates a node and stores its display label in the React Flow data map. */
     constructor(id: String, label: String, x: Double, y: Double) : this(id, x, y) {
         data["label"] = label
     }
 
+    /** Creates a labeled node using one of React Flow's built-in or custom types. */
     constructor(id: String, type: String, label: String, x: Double, y: Double) : this(id, label, x, y) {
         this.type = type
     }
 
+    /** Fluent helper for changing the display label. */
     fun label(label: String): ReactFlowNode = apply {
         data["label"] = label
     }
 
+    /** Adds custom serializable data consumed by custom React node renderers. */
     fun withData(key: String, value: Any): ReactFlowNode = apply {
         data[key] = value
     }
 
+    /** Sets the React Flow node type. */
     fun withType(type: String): ReactFlowNode = apply {
         this.type = type
     }
 
+    /** Makes this node a child of a group/parent node. */
     fun withParent(parentId: String, extent: String? = null): ReactFlowNode = apply {
         this.parentId = parentId
         this.extent = extent
     }
 
+    /** Restricts dragging to the given extent, commonly "parent" for group nodes. */
     fun withExtent(extent: String = "parent"): ReactFlowNode = apply {
         this.extent = extent
     }
 
+    /** Enables parent expansion when this child is dragged beyond current bounds. */
     fun withExpandParent(expandParent: Boolean = true): ReactFlowNode = apply {
         this.expandParent = expandParent
     }
 
+    /** Applies inline CSS style properties to the node. */
     fun withStyle(style: Map<String, Any>): ReactFlowNode = apply {
         this.style = style
     }
 
+    /** Stores dimensions both as React Flow metadata and CSS style values. */
     fun withSize(width: Int, height: Int): ReactFlowNode = apply {
         this.width = width
         this.height = height
@@ -74,9 +93,11 @@ class ReactFlowNode(
     }
 
     companion object {
+        /** Convenience factory for React Flow group nodes with fixed dimensions. */
         fun group(id: String, label: String, x: Double, y: Double, width: Int, height: Int): ReactFlowNode =
             ReactFlowNode(id, "group", label, x, y).withSize(width, height)
     }
 
+    /** Position of the node's top-left corner in React Flow coordinates. */
     class NodePosition(var x: Double = 0.0, var y: Double = 0.0) : Serializable
 }

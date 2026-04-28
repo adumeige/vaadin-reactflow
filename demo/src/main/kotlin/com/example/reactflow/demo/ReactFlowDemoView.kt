@@ -10,6 +10,7 @@ import com.vaadin.flow.component.combobox.ComboBox
 import com.vaadin.flow.component.formlayout.FormLayout
 import com.vaadin.flow.component.html.H2
 import com.vaadin.flow.component.html.Paragraph
+import com.vaadin.flow.component.html.Span
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
@@ -18,7 +19,6 @@ import com.vaadin.flow.component.tabs.Tabs
 import com.vaadin.flow.component.textfield.IntegerField
 import com.vaadin.flow.component.textfield.NumberField
 import com.vaadin.flow.component.textfield.TextField
-import com.vaadin.flow.component.html.Span
 import com.vaadin.flow.router.Menu
 import com.vaadin.flow.router.Route
 
@@ -40,7 +40,7 @@ class ReactFlowDemoView : VerticalLayout() {
 
         val flow = ReactFlow()
         flow.setDefaultEdgeType("floating")
-        flow.setHeight("500px")
+        flow.setHeight("100%")
         flow.setWidthFull()
 
         // --- Nodes ---
@@ -211,14 +211,26 @@ class ReactFlowDemoView : VerticalLayout() {
         val deletableCheckbox = Checkbox("Deletable")
 
         // --- Style fields ---
-        val bgColorField = TextField("Background").apply { setWidthFull(); placeholder = "#ffffff"; prefixComponent = colorSwatch("bgSwatch") }
-        val textColorField = TextField("Text color").apply { setWidthFull(); placeholder = "#000000"; prefixComponent = colorSwatch("txtSwatch") }
-        val fontSizeField = IntegerField("Font size (px)").apply { setWidthFull(); min = 6; max = 72; isStepButtonsVisible = true; step = 1; value = 12 }
+        val bgColorField = TextField("Background").apply {
+            setWidthFull(); placeholder = "#ffffff"; prefixComponent = colorSwatch("bgSwatch")
+        }
+        val textColorField = TextField("Text color").apply {
+            setWidthFull(); placeholder = "#000000"; prefixComponent = colorSwatch("txtSwatch")
+        }
+        val fontSizeField = IntegerField("Font size (px)").apply {
+            setWidthFull(); min = 6; max = 72; isStepButtonsVisible = true; step = 1; value = 12
+        }
         val boldCheckbox = Checkbox("Bold")
         val italicCheckbox = Checkbox("Italic")
-        val borderColorField = TextField("Border color").apply { setWidthFull(); placeholder = "#1a192b"; prefixComponent = colorSwatch("borderSwatch") }
-        val borderRadiusField = IntegerField("Border radius (px)").apply { setWidthFull(); min = 0; max = 50; isStepButtonsVisible = true; step = 1; value = 3 }
-        val borderWidthField = IntegerField("Border width (px)").apply { setWidthFull(); min = 0; max = 10; isStepButtonsVisible = true; step = 1; value = 1 }
+        val borderColorField = TextField("Border color").apply {
+            setWidthFull(); placeholder = "#1a192b"; prefixComponent = colorSwatch("borderSwatch")
+        }
+        val borderRadiusField = IntegerField("Border radius (px)").apply {
+            setWidthFull(); min = 0; max = 50; isStepButtonsVisible = true; step = 1; value = 3
+        }
+        val borderWidthField = IntegerField("Border width (px)").apply {
+            setWidthFull(); min = 0; max = 10; isStepButtonsVisible = true; step = 1; value = 1
+        }
 
         val deleteBtn = Button("Delete node")
 
@@ -265,14 +277,20 @@ class ReactFlowDemoView : VerticalLayout() {
 
                 val s = node.style.orEmpty()
                 bgColorField.value = s["background"] as? String ?: ""
-                bgColorField.prefixComponent?.element?.style?.set("background", bgColorField.value.ifBlank { "#ffffff" })
+                bgColorField.prefixComponent?.element?.style?.set(
+                    "background",
+                    bgColorField.value.ifBlank { "#ffffff" })
                 textColorField.value = s["color"] as? String ?: ""
-                textColorField.prefixComponent?.element?.style?.set("background", textColorField.value.ifBlank { "#000000" })
+                textColorField.prefixComponent?.element?.style?.set(
+                    "background",
+                    textColorField.value.ifBlank { "#000000" })
                 fontSizeField.value = (s["fontSize"] as? String)?.removeSuffix("px")?.toIntOrNull() ?: 12
                 boldCheckbox.value = (s["fontWeight"] as? String) == "bold"
                 italicCheckbox.value = (s["fontStyle"] as? String) == "italic"
                 borderColorField.value = s["borderColor"] as? String ?: ""
-                borderColorField.prefixComponent?.element?.style?.set("background", borderColorField.value.ifBlank { "#1a192b" })
+                borderColorField.prefixComponent?.element?.style?.set(
+                    "background",
+                    borderColorField.value.ifBlank { "#1a192b" })
                 borderRadiusField.value = (s["borderRadius"] as? String)?.removeSuffix("px")?.toIntOrNull() ?: 3
                 borderWidthField.value = (s["borderWidth"] as? String)?.removeSuffix("px")?.toIntOrNull() ?: 1
             } finally {
@@ -319,7 +337,9 @@ class ReactFlowDemoView : VerticalLayout() {
             applyStyle("background", bgColorField.value)
         }
         textColorField.addValueChangeListener {
-            textColorField.prefixComponent?.element?.style?.set("background", textColorField.value.ifBlank { "#000000" })
+            textColorField.prefixComponent?.element?.style?.set(
+                "background",
+                textColorField.value.ifBlank { "#000000" })
             applyStyle("color", textColorField.value)
         }
         fontSizeField.addValueChangeListener {
@@ -332,7 +352,9 @@ class ReactFlowDemoView : VerticalLayout() {
             applyStyle("fontStyle", if (italicCheckbox.value) "italic" else null)
         }
         borderColorField.addValueChangeListener {
-            borderColorField.prefixComponent?.element?.style?.set("background", borderColorField.value.ifBlank { "#1a192b" })
+            borderColorField.prefixComponent?.element?.style?.set(
+                "background",
+                borderColorField.value.ifBlank { "#1a192b" })
             applyStyle("borderColor", borderColorField.value)
         }
         borderRadiusField.addValueChangeListener {
