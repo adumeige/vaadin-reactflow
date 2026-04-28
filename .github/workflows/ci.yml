@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  packages: write
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -37,7 +38,14 @@ jobs:
           node-version: '20'
 
       - name: Build and test
+        if: github.event_name != 'push' || github.ref != 'refs/heads/main'
         run: mvn -B -ntp -Pproduction verify
+
+      - name: Build, test and publish Maven package
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: mvn -B -ntp -Pproduction deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload build artifacts
         if: success()
