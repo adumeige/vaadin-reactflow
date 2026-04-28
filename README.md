@@ -30,7 +30,7 @@ Add the component as a dependency:
 <dependency>
     <groupId>org.antoined</groupId>
     <artifactId>vaadin-reactflow-component</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
