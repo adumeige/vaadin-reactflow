@@ -1,5 +1,7 @@
 # Vaadin React Flow
 
+[![CI](https://github.com/adumeige/vaadin-reactflow/actions/workflows/ci.yml/badge.svg)](https://github.com/adumeige/vaadin-reactflow/actions/workflows/ci.yml)
+
 A Vaadin Flow component that embeds [React Flow](https://reactflow.dev/) for building interactive node-based UIs from Kotlin.
 
 ## Features
