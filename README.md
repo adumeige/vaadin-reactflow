@@ -2,7 +2,8 @@
 
 [![CI](https://github.com/adumeige/vaadin-reactflow/actions/workflows/ci.yml/badge.svg)](https://github.com/adumeige/vaadin-reactflow/actions/workflows/ci.yml)
 
-A Vaadin Flow component that embeds [React Flow](https://reactflow.dev/) for building interactive node-based UIs from Kotlin.
+A Vaadin Flow component that embeds [React Flow](https://reactflow.dev/) for building interactive node-based UIs from
+Kotlin.
 
 ## Features
 
@@ -22,22 +23,41 @@ A Vaadin Flow component that embeds [React Flow](https://reactflow.dev/) for bui
 
 ## Quick start
 
+Add the component as a dependency:
+
+```xml
+
+<dependency>
+    <groupId>org.antoined</groupId>
+    <artifactId>vaadin-reactflow-component</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+
+Then use the component.
+
+It has not been tested with Java yet, but kotlin interop should work just fine, no dark magic.
+
 ```kotlin
 val flow = ReactFlow().apply {
     setWidthFull()
     setHeight("600px")
     setDefaultEdgeType("floating")
 
-    addNodes(listOf(
-        ReactFlowNode("start", "input", "Start", 0.0, 0.0),
-        ReactFlowNode("process", "default", "Process", 250.0, 0.0),
-        ReactFlowNode("done", "output", "Done", 500.0, 0.0),
-    ))
+    addNodes(
+        listOf(
+            ReactFlowNode("start", "input", "Start", 0.0, 0.0),
+            ReactFlowNode("process", "default", "Process", 250.0, 0.0),
+            ReactFlowNode("done", "output", "Done", 500.0, 0.0),
+        )
+    )
 
-    addEdges(listOf(
-        ReactFlowEdge("start", "process").withAnimated(true),
-        ReactFlowEdge("process", "done").withArrowEnd(),
-    ))
+    addEdges(
+        listOf(
+            ReactFlowEdge("start", "process").withAnimated(true),
+            ReactFlowEdge("process", "done").withArrowEnd(),
+        )
+    )
 }
 
 add(flow)
