@@ -20,7 +20,7 @@ import java.io.Serializable
 @NpmPackage(value = "html-to-image", version = "1.11.11")
 @NpmPackage(value = "@dagrejs/dagre", version = "1.1.4")
 @NpmPackage(value = "elkjs", version = "0.9.3")
-@JsModule("components/react-flow/react-flow-adapter.tsx")
+@JsModule("./components/react-flow/react-flow-adapter.tsx")
 @Tag("vaadin-react-flow")
 class ReactFlow : ReactAdapterComponent(), HasSize, HasStyle {
 

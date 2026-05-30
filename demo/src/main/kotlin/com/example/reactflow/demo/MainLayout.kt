@@ -1,6 +1,7 @@
 package com.example.reactflow.demo
 
 import com.vaadin.flow.component.applayout.AppLayout
+import com.vaadin.flow.component.Component
 import com.vaadin.flow.component.html.H4
 import com.vaadin.flow.component.orderedlayout.FlexComponent
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
@@ -12,7 +13,7 @@ import com.vaadin.flow.router.RouterLink
 @Layout
 class MainLayout : AppLayout() {
 
-    private data class NavItem(val title: String, val path: String, val target: Class<*>)
+    private data class NavItem(val title: String, val path: String, val target: Class<out Component>)
 
     private val navItems = listOf(
         NavItem("Playground", "", ReactFlowDemoView::class.java),
@@ -33,7 +34,7 @@ class MainLayout : AppLayout() {
         }
 
         navItems.forEach { item ->
-            val link = RouterLink(item.title, item.target as Class<com.vaadin.flow.component.Component>)
+            val link = RouterLink(item.title, item.target)
             val tab = Tab(link)
             tabs.add(tab)
             tabMap[item.path] = tab
