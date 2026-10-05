@@ -1,4 +1,4 @@
-package com.example.reactflow.component
+package io.github.adumeige.vaadin.reactflow.component
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.io.Serializable
