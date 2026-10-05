@@ -1,4 +1,4 @@
-package com.example.reactflow
+package io.github.adumeige.vaadin.reactflow
 
 import com.vaadin.flow.component.page.AppShellConfigurator
 import com.vaadin.flow.component.page.Push

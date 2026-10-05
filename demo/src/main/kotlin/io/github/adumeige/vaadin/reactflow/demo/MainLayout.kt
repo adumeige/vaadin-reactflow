@@ -1,4 +1,4 @@
-package com.example.reactflow.demo
+package io.github.adumeige.vaadin.reactflow.demo
 
 import com.vaadin.flow.component.applayout.AppLayout
 import com.vaadin.flow.component.Component

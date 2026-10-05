@@ -1,4 +1,4 @@
-package com.example.reactflow.component
+package io.github.adumeige.vaadin.reactflow.component
 
 import com.vaadin.flow.component.HasSize
 import com.vaadin.flow.component.HasStyle

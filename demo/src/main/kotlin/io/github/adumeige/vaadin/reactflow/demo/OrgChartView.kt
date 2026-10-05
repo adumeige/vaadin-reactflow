@@ -1,10 +1,10 @@
-package com.example.reactflow.demo
+package io.github.adumeige.vaadin.reactflow.demo
 
-import com.example.reactflow.component.ReactFlow
-import com.example.reactflow.component.ReactFlow.LayoutAlgorithm
-import com.example.reactflow.component.ReactFlow.LayoutDirection
-import com.example.reactflow.component.ReactFlowEdge
-import com.example.reactflow.component.ReactFlowNode
+import io.github.adumeige.vaadin.reactflow.component.ReactFlow
+import io.github.adumeige.vaadin.reactflow.component.ReactFlow.LayoutAlgorithm
+import io.github.adumeige.vaadin.reactflow.component.ReactFlow.LayoutDirection
+import io.github.adumeige.vaadin.reactflow.component.ReactFlowEdge
+import io.github.adumeige.vaadin.reactflow.component.ReactFlowNode
 import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.html.H3
 import com.vaadin.flow.component.html.Paragraph
